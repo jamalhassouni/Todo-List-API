@@ -33,14 +33,25 @@ if (isset($data->id) AND isset($data->item)) {
     $todo->sort = $data->sort;
     $todo->todoStatu = $data->type;
     // Update post
-    if ($todo->markAsCompleted()) {
-        $output['status'] = 200;
-        $output['message'] = "Task  Updated";
-    } else {
-        $output['status'] = 204;
-        $output['message'] = "Task Not Updated";
+    if ($data->type == 1) {
+        if ($todo->markAsUncompleted()) {
+            $output['status'] = 200;
+            $output['message'] = "Task  Updated";
+        } else {
+            $output['status'] = 204;
+            $output['message'] = "Task Not Updated";
+        }
+    } elseif ($data->type == 2) {
+
+        if ($todo->markAsCompleted()) {
+            $output['status'] = 200;
+            $output['message'] = "Task  Updated";
+        } else {
+            $output['status'] = 204;
+            $output['message'] = "Task Not Updated";
+        }
     }
-} elseif (isset($data->from) AND isset($data->posFrom) AND isset($data->to) AND isset($data->posTo)){
+} elseif (isset($data->from) AND isset($data->posFrom) AND isset($data->to) AND isset($data->posTo)) {
     $todo->from = $data->from;
     $todo->PosFrom = $data->posFrom;
     $todo->to = $data->to;

@@ -200,78 +200,80 @@ class Todo
 
     public function markAsCompleted()
     {
-        if ($this->todoStatu == 2) {
-            $query = 'UPDATE ' . $this->table . ' SET sort = sort +1 WHERE todoStatu= :todoStatu';
+        $query = 'UPDATE ' . $this->table . ' SET sort = sort +1 WHERE todoStatu= :todoStatu';
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        // Clean data
+        $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+        // Bind data
+        $stmt->bindParam(':todoStatu', $this->todoStatu);
+        if ($stmt->execute()) {
+            // Create query
+            $query = 'UPDATE ' . $this->table . ' SET sort = sort - 1 WHERE sort > :sort and todoStatu = 1';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Clean data
-            $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+            $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
             // Bind data
-            $stmt->bindParam(':todoStatu', $this->todoStatu);
+            $stmt->bindParam(':sort', $this->sort);
             if ($stmt->execute()) {
-                // Create query
-                $query = 'UPDATE ' . $this->table . ' SET sort = sort - 1 WHERE sort > :sort and todoStatu = 1';
+                $query = 'UPDATE  ' . $this->table . ' SET sort=1,todoStatu=:todoStatu,completDate=:completDate WHERE id=:id';
                 // Prepare statement
                 $stmt = $this->conn->prepare($query);
                 // Clean data
-                $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
+                $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+                $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+                $this->completDate = date("Y-m-d H:i:s");
                 // Bind data
-                $stmt->bindParam(':sort', $this->sort);
+                $stmt->bindParam(':id', $this->id);
+                $stmt->bindParam(':todoStatu', $this->todoStatu);
+                $stmt->bindParam(':completDate', $this->completDate);
                 if ($stmt->execute()) {
-                    $query = 'UPDATE  ' . $this->table . ' SET sort=1,todoStatu=:todoStatu,completDate=:completDate WHERE id=:id';
-                    // Prepare statement
-                    $stmt = $this->conn->prepare($query);
-                    // Clean data
-                    $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
-                    $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
-                    $this->completDate = date("Y-m-d H:i:s");
-                    // Bind data
-                    $stmt->bindParam(':id', $this->id);
-                    $stmt->bindParam(':todoStatu', $this->todoStatu);
-                    $stmt->bindParam(':completDate', $this->completDate);
-                    if ($stmt->execute()) {
-                        return true;
-                    }
+                    return true;
                 }
             }
-
         }
-        if ($this->todoStatu == 1) {
-            $query = 'UPDATE ' . $this->table . ' SET sort = sort +1 WHERE todoStatu= :todoStatu';
+
+
+        return false;
+    }
+
+    public function markAsUncompleted()
+    {
+        $query = 'UPDATE ' . $this->table . ' SET sort = sort +1 WHERE todoStatu= :todoStatu';
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        // Clean data
+        $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+        // Bind data
+        $stmt->bindParam(':todoStatu', $this->todoStatu);
+        if ($stmt->execute()) {
+            // Create query
+            $query = 'UPDATE ' . $this->table . ' SET sort = sort - 1 WHERE sort > :sort and todoStatu = 2';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Clean data
-            $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+            $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
             // Bind data
-            $stmt->bindParam(':todoStatu', $this->todoStatu);
+            $stmt->bindParam(':sort', $this->sort);
             if ($stmt->execute()) {
-                // Create query
-                $query = 'UPDATE ' . $this->table . ' SET sort = sort - 1 WHERE sort > :sort and todoStatu = 2';
+                $query = 'UPDATE  ' . $this->table . ' SET sort=1,todoStatu=:todoStatu,completDate=:completDate WHERE id=:id';
                 // Prepare statement
                 $stmt = $this->conn->prepare($query);
                 // Clean data
-                $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
+                $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+                $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+                $this->completDate = '0000-00-00 00:00:00';
                 // Bind data
-                $stmt->bindParam(':sort', $this->sort);
+                $stmt->bindParam(':id', $this->id);
+                $stmt->bindParam(':todoStatu', $this->todoStatu);
+                $stmt->bindParam(':completDate', $this->completDate);
                 if ($stmt->execute()) {
-                    $query = 'UPDATE  ' . $this->table . ' SET sort=1,todoStatu=:todoStatu,completDate=:completDate WHERE id=:id';
-                    // Prepare statement
-                    $stmt = $this->conn->prepare($query);
-                    // Clean data
-                    $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
-                    $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
-                    $this->completDate = '0000-00-00 00:00:00';
-                    // Bind data
-                    $stmt->bindParam(':id', $this->id);
-                    $stmt->bindParam(':todoStatu', $this->todoStatu);
-                    $stmt->bindParam(':completDate', $this->completDate);
-                    if ($stmt->execute()) {
-                        return true;
-                    }
+                    return true;
                 }
             }
-
         }
+
         return false;
     }
 
