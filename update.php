@@ -36,19 +36,19 @@ if (isset($data->id) AND isset($data->item)) {
     if ($data->type == 1) {
         if ($todo->markAsUncompleted()) {
             $output['status'] = 200;
-            $output['message'] = "Task  Updated";
+            $output['message'] = "Task  Uncompleted";
         } else {
             $output['status'] = 204;
-            $output['message'] = "Task Not Updated";
+            $output['message'] = "Task Not Uncompleted";
         }
     } elseif ($data->type == 2) {
 
         if ($todo->markAsCompleted()) {
             $output['status'] = 200;
-            $output['message'] = "Task  Updated";
+            $output['message'] = "Task  Completed";
         } else {
             $output['status'] = 204;
-            $output['message'] = "Task Not Updated";
+            $output['message'] = "Task Not Completed";
         }
     }
 } elseif (isset($data->from) AND isset($data->posFrom) AND isset($data->to) AND isset($data->posTo)) {
