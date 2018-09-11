@@ -66,7 +66,7 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
 
-        $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+        $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
 
         // Bind ID
         $stmt->bindParam(1, $this->id);
@@ -104,8 +104,8 @@ class Todo
 
                 // Clean data
                 $this->item = filter_var($this->item, FILTER_SANITIZE_STRING);
-                $this->sort = filter_var(1, FILTER_VALIDATE_INT);
-                $this->todoStatu = filter_var(1, FILTER_VALIDATE_INT);
+                $this->sort = filter_var(1, FILTER_SANITIZE_NUMBER_INT);
+                $this->todoStatu = filter_var(1, FILTER_SANITIZE_NUMBER_INT);
 
                 // Bind data
                 $stmt->bindParam(':item', $this->item);
@@ -130,7 +130,7 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         // Clean data
-        $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+        $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
         $this->item = filter_var($this->item, FILTER_SANITIZE_STRING);
         // Bind data
         $stmt->bindParam(':id', $this->id);
@@ -154,7 +154,7 @@ class Todo
         $stmtFind = $this->conn->prepare($query);
 
         // Clean data
-        $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+        $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
         // Bind data
         $stmtFind->bindParam(':id', $this->id);
         // Execute query
@@ -166,8 +166,8 @@ class Todo
             $stmtUpdate = $this->conn->prepare($query);
 
             // Clean data
-            $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
-            $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+            $this->sort = filter_var($this->sort, FILTER_SANITIZE_NUMBER_INT);
+            $this->todoStatu = filter_var($this->todoStatu, FILTER_SANITIZE_NUMBER_INT);
 
             // Bind data
             $stmtUpdate->bindParam(':sort', $this->sort);
@@ -181,7 +181,7 @@ class Todo
                 $stmt = $this->conn->prepare($query);
 
                 // Clean data
-                $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+                $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
                 // Bind data
                 $stmt->bindParam(':id', $this->id);
 
@@ -206,7 +206,7 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         // Clean data
-        $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+        $this->todoStatu = filter_var($this->todoStatu, FILTER_SANITIZE_NUMBER_INT);
         // Bind data
         $stmt->bindParam(':todoStatu', $this->todoStatu);
         if ($stmt->execute()) {
@@ -215,7 +215,7 @@ class Todo
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Clean data
-            $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
+            $this->sort = filter_var($this->sort, FILTER_SANITIZE_NUMBER_INT);
             // Bind data
             $stmt->bindParam(':sort', $this->sort);
             if ($stmt->execute()) {
@@ -223,8 +223,8 @@ class Todo
                 // Prepare statement
                 $stmt = $this->conn->prepare($query);
                 // Clean data
-                $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
-                $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+                $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
+                $this->todoStatu = filter_var($this->todoStatu, FILTER_SANITIZE_NUMBER_INT);
                 $this->completDate = date("Y-m-d H:i:s");
                 // Bind data
                 $stmt->bindParam(':id', $this->id);
@@ -246,7 +246,7 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         // Clean data
-        $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+        $this->todoStatu = filter_var($this->todoStatu, FILTER_SANITIZE_NUMBER_INT);
         // Bind data
         $stmt->bindParam(':todoStatu', $this->todoStatu);
         if ($stmt->execute()) {
@@ -255,7 +255,7 @@ class Todo
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Clean data
-            $this->sort = filter_var($this->sort, FILTER_VALIDATE_INT);
+            $this->sort = filter_var($this->sort, FILTER_SANITIZE_NUMBER_INT);
             // Bind data
             $stmt->bindParam(':sort', $this->sort);
             if ($stmt->execute()) {
@@ -263,8 +263,8 @@ class Todo
                 // Prepare statement
                 $stmt = $this->conn->prepare($query);
                 // Clean data
-                $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
-                $this->todoStatu = filter_var($this->todoStatu, FILTER_VALIDATE_INT);
+                $this->id = filter_var($this->id, FILTER_SANITIZE_NUMBER_INT);
+                $this->todoStatu = filter_var($this->todoStatu, FILTER_SANITIZE_NUMBER_INT);
                 $this->completDate = '0000-00-00 00:00:00';
                 // Bind data
                 $stmt->bindParam(':id', $this->id);
@@ -286,10 +286,10 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
         // Clean data
-        $this->from = filter_var($this->from, FILTER_VALIDATE_INT);
-        $this->to = filter_var($this->to, FILTER_VALIDATE_INT);
-        $this->PosFrom = filter_var($this->PosFrom, FILTER_VALIDATE_INT);
-        $this->PosTo = filter_var($this->PosTo, FILTER_VALIDATE_INT);
+        $this->from = filter_var($this->from, FILTER_SANITIZE_NUMBER_INT);
+        $this->to = filter_var($this->to, FILTER_SANITIZE_NUMBER_INT);
+        $this->PosFrom = filter_var($this->PosFrom, FILTER_SANITIZE_NUMBER_INT);
+        $this->PosTo = filter_var($this->PosTo, FILTER_SANITIZE_NUMBER_INT);
         // Bind data
         $stmt->bindParam(':from', $this->from);
         $stmt->bindParam(':to', $this->to);
