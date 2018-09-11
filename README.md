@@ -40,7 +40,7 @@ Edit the following lines in the bottom of the file "config/Database.php":
 
 ### CRUD + List
 
-The example posts todo has only a a few fields:
+The example todo has only a a few fields:
 
 ```code 
 todo
