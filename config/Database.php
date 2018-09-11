@@ -3,10 +3,10 @@
 class Database
 {
     // DB Params
-    private $host = 'localhost';
-    private $db_name = 'todoApp';
-    private $username = 'root';
-    private $password = '';
+    private $host = 'xxx';
+    private $db_name = 'xxx';
+    private $username = 'xxx';
+    private $password = 'xxx';
     private $conn;
 
     // DB Connect
