@@ -66,6 +66,8 @@ class Todo
         // Prepare statement
         $stmt = $this->conn->prepare($query);
 
+        $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
+
         // Bind ID
         $stmt->bindParam(1, $this->id);
 
