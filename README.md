@@ -186,9 +186,8 @@ If you want to delete a record from this table the request can be written in URL
 
 ### Sort 
 
-To update a record in this table the request can be written in URL format as:
+To update a record sort in this table the request can be written in URL format as:
 
-* Edit task title 
 
 `PUT /update.php`
 
